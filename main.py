@@ -18,12 +18,13 @@ export default function PreRepeter() {
 
     try {
       const res = await axios.post("https://prerepeter-backend.onrender.com/upload/", formData, {
+        responseType: "blob",
         headers: {
           "Content-Type": "multipart/form-data"
         }
       });
 
-      const blob = new Blob([res.data], { type: res.headers['content-type'] });
+      const blob = new Blob([res.data], { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" });
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
