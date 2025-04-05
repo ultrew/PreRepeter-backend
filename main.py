@@ -23,7 +23,6 @@ export default function PreRepeter() {
         }
       });
 
-      // If it's a file response (docx), trigger download
       const blob = new Blob([res.data], { type: res.headers['content-type'] });
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
