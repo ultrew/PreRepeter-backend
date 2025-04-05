@@ -18,6 +18,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get("/")
+async def root():
+    return {"message": "PreRepeter Backend is live!"}
+
 def extract_text_from_pdf(file_path):
     doc = fitz.open(file_path)
     text = ""
@@ -67,4 +71,8 @@ async def upload_pdfs(files: list[UploadFile] = File(...)):
     output_path = "repeated_questions.docx"
     create_docx(repeated, output_path)
 
-    return FileResponse(output_path, media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document", filename=output_path)
+    return FileResponse(
+        output_path,
+        media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        filename=output_path
+    )
